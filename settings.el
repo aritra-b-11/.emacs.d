@@ -7,6 +7,21 @@
    t)
   (package-initialize))
 
+(require 'auto-complete)
+(global-auto-complete-mode t)
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+(setq ac-auto-start 3)
+(define-key ac-complete-mode-map "\M-/" 'ac-stop)
+(define-key ac-complete-mode-map "\t" 'ac-complete)
+(define-key ac-complete-mode-map "\r" nil)
+(setq ac-dwim t)
+(setq-default ac-sources '(ac-source-abbrev ac-source-words-in-buffer))
+
+(add-hook 'emacs-lisp-mode-hook
+ (lambda ()
+ (setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
+
 ;; Completion words longer than 4 characters
 (custom-set-variables
   '(ac-ispell-requires 4)
@@ -21,6 +36,13 @@
 
 (require 'auto-dictionary)
 (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
+
+(require 'latex-extra)
+(add-hook 'LaTeX-mode-hook #'latex-extra-mode)
+
+(latex-preview-pane-enable)
+
+(require 'vlf-setup)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;           GLOBAL EMACS OPTIONS              ;;

@@ -9,6 +9,25 @@
   (package-initialize))
 #+end_src
 * package specific
+** auto complete
+#+begin_src emacs-lisp :tangle yes
+(require 'auto-complete)
+(global-auto-complete-mode t)
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+(setq ac-auto-start 3)
+(define-key ac-complete-mode-map "\M-/" 'ac-stop)
+(define-key ac-complete-mode-map "\t" 'ac-complete)
+(define-key ac-complete-mode-map "\r" nil)
+(setq ac-dwim t)
+(setq-default ac-sources '(ac-source-abbrev ac-source-words-in-buffer))
+#+end_src
+*** auto complete elisp
+#+begin_src emacs-lisp :tangle yes
+(add-hook 'emacs-lisp-mode-hook
+ (lambda ()
+ (setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
+#+end_src
 ** auto complete ispell
 #+begin_src emacs-lisp :tangle yes
     ;; Completion words longer than 4 characters
@@ -28,7 +47,19 @@
 (require 'auto-dictionary)
 (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
 #+end_src
-
+** latex extra
+#+begin_src emacs-lisp :tangle yes
+    (require 'latex-extra)
+    (add-hook 'LaTeX-mode-hook #'latex-extra-mode)
+#+end_src
+** latex preview
+#+begin_src emacs-lisp :tangle yes
+(latex-preview-pane-enable)
+#+end_src
+** very large file
+#+begin_src emacs-lisp :tangle yes
+(require 'vlf-setup)
+#+end_src
 * mode specific
 #+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
