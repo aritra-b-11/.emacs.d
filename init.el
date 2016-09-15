@@ -1,3 +1,4 @@
+(require 'org-install)
 (org-babel-load-file "~/.emacs.d/settings.org")
 
 (custom-set-variables
