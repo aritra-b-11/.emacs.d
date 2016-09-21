@@ -22,6 +22,8 @@
  (lambda ()
  (setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
 
+(require 'auto-complete-auctex)
+
 ;; Completion words longer than 4 characters
 (custom-set-variables
   '(ac-ispell-requires 4)
@@ -37,8 +39,15 @@
 (require 'auto-dictionary)
 (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
 
-(require 'latex-extra)
-(add-hook 'LaTeX-mode-hook #'latex-extra-mode)
+(require 'ac-octave)
+    (defun ac-octave-mode-setup ()
+      (setq ac-sources '(ac-source-octave)))
+      (add-hook 'octave-mode-hook
+        '(lambda () (ac-octave-mode-setup)))
+
+(require 'cl)
+    (require 'latex-extra)
+    (add-hook 'LaTeX-mode-hook #'latex-extra-mode)
 
 (latex-preview-pane-enable)
 
@@ -50,6 +59,55 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-,") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+
+(require 'easy-kill)
+(global-set-key [remap kill-ring-save] 'easy-kill)
+(global-set-key [remap mark-sexp] 'easy-mark)
+
+(require 'easy-kill-extras)
+  ;; Upgrade `mark-word' and `mark-sexp' with easy-mark
+  ;; equivalents.
+  (global-set-key (kbd "M-@") 'easy-mark-word)
+  (global-set-key (kbd "C-M-@") 'easy-mark-sexp)
+
+  ;; `easy-mark-to-char' or `easy-mark-up-to-char' could be a good
+  ;; replacement for `zap-to-char'.
+  (global-set-key [remap zap-to-char] 'easy-mark-to-char)
+
+  ;; Add the following tuples to `oeasy-kill-alist', preferrably by
+  ;; using `customize-variable'.
+  (add-to-list 'easy-kill-alist '(?^ backward-line-edge ""))
+  (add-to-list 'easy-kill-alist '(?$ forward-line-edge ""))
+  (add-to-list 'easy-kill-alist '(?b buffer ""))
+  (add-to-list 'easy-kill-alist '(?< buffer-before-point ""))
+  (add-to-list 'easy-kill-alist '(?> buffer-after-point ""))
+  (add-to-list 'easy-kill-alist '(?f string-to-char-forward ""))
+  (add-to-list 'easy-kill-alist '(?F string-up-to-char-forward ""))
+  (add-to-list 'easy-kill-alist '(?t string-to-char-backward ""))
+  (add-to-list 'easy-kill-alist '(?T string-up-to-char-backward ""))
+
+(require 'projectile-codesearch)
+
+(require 'anyins)
+(global-set-key (kbd "C-c a") 'anyins-mode)
+
+(require 'inline-string-rectangle)
+(global-set-key (kbd "C-x r t") 'inline-string-rectangle)
+
+(require 'mark-more-like-this)
+(global-set-key (kbd "C-<") 'mark-previous-like-this)
+(global-set-key (kbd "C->") 'mark-next-like-this)
+(global-set-key (kbd "C-M-m") 'mark-more-like-this) ; like the other two, but takes an argument (negative is previous)
+
+(add-hook 'sgml-mode-hook
+          (lambda ()
+            (require 'rename-sgml-tag)
+            (define-key sgml-mode-map (kbd "C-c C-r") 'rename-sgml-tag)))
+
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+(require 'el-autoyas)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;           GLOBAL EMACS OPTIONS              ;;
@@ -137,6 +195,11 @@
 (setq inhibit-startup-echo-area-message t)
 (setq inhibit-startup-message t)
 
+;dark theme
+;(load-theme 'afternoon t)
+;light theme
+(load-theme 'tsdh-light)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                     keyboard macro                            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -184,9 +247,9 @@
 (global-set-key [delete] 'delete-char ) ;C-d kills word to the left
 (global-set-key (kbd "C-S-k") 'backward-kill-line ) ;C-K kills backward line
 (global-set-key (kbd "C-M-S-k") 'backward-kill-sexp ) ;C-M-K kills backward balanced expression
-(global-set-key [capslock] '\C) ; <----- does not work
+;(global-set-key [capslock] '\C) ; <----- does not work
 (global-set-key (kbd "C-@") 'mark-full-word-under-cursor ) ;C-S-2 mark full word by before and after word movement
 (global-set-key [f1] '(lambda() (interactive) (ansi-term "/bin/bash")));start shell replaced with help button
 (global-set-key (kbd "\C-x p") 'eval-buffer);eval buffer
-(global-set-key [remap kill-ring-save] 'easy-kill)
-(global-set-key [remap mark-sexp] 'easy-mark)
+(define-key global-map (kbd "RET") 'newline-and-indent)
+(global-set-key "\M-?" 'hippie-expand)
