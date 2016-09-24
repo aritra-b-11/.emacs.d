@@ -13,12 +13,7 @@
 #+begin_src emacs-lisp :tangle yes
 (require 'auto-complete)
 (global-auto-complete-mode t)
-(define-key ac-complete-mode-map "\C-n" 'ac-next)
-(define-key ac-complete-mode-map "\C-p" 'ac-previous)
 (setq ac-auto-start 3)
-(define-key ac-complete-mode-map "\M-/" 'ac-stop)
-(define-key ac-complete-mode-map "\t" 'ac-complete)
-(define-key ac-complete-mode-map "\r" nil)
 (setq ac-dwim t)
 (setq-default ac-sources '(ac-source-abbrev ac-source-words-in-buffer))
 #+end_src
@@ -76,29 +71,19 @@
 ** multiple cursor
 #+begin_src emacs-lisp :tangle yes
     (require 'multiple-cursors)
-    (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-    (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-    (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-    (global-set-key (kbd "C-c C-,") 'mc/mark-all-like-this)
-    (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 #+end_src
 ** easy kill
 #+begin_src emacs-lisp :tangle yes
 (require 'easy-kill)
-(global-set-key [remap kill-ring-save] 'easy-kill)
-(global-set-key [remap mark-sexp] 'easy-mark)
 #+end_src
 ** easy kill extra
 #+begin_src emacs-lisp :tangle yes
 (require 'easy-kill-extras)
   ;; Upgrade `mark-word' and `mark-sexp' with easy-mark
   ;; equivalents.
-  (global-set-key (kbd "M-@") 'easy-mark-word)
-  (global-set-key (kbd "C-M-@") 'easy-mark-sexp)
 
   ;; `easy-mark-to-char' or `easy-mark-up-to-char' could be a good
   ;; replacement for `zap-to-char'.
-  (global-set-key [remap zap-to-char] 'easy-mark-to-char)
 
   ;; Add the following tuples to `oeasy-kill-alist', preferrably by
   ;; using `customize-variable'.
@@ -119,17 +104,12 @@
 ** anyins
 #+begin_src emacs-lisp :tangle yes
 (require 'anyins)
-(global-set-key (kbd "C-c a") 'anyins-mode)
 #+end_src
 ** mark multiple
 #+begin_src emacs-lisp :tangle yes
     (require 'inline-string-rectangle)
-    (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
 
     (require 'mark-more-like-this)
-    (global-set-key (kbd "C-<") 'mark-previous-like-this)
-    (global-set-key (kbd "C->") 'mark-next-like-this)
-    (global-set-key (kbd "C-M-m") 'mark-more-like-this) ; like the other two, but takes an argument (negative is previous)
 
     (add-hook 'sgml-mode-hook
               (lambda ()
@@ -139,12 +119,66 @@
 ** expand region
 #+begin_src emacs-lisp :tangle yes
     (require 'expand-region)
-    (global-set-key (kbd "C-=") 'er/expand-region)
 #+end_src
 ** auto YAS elisp
 #+begin_src emacs-lisp :tangle yes
     (require 'el-autoyas)
 #+end_src
+** ace jump mode
+#+begin_src emacs-lisp :tangle yes
+
+; ace jump mode major function
+
+(add-to-list 'load-path "~/.emacs.d/elpa/ace-jump-mode-20140616.115/")
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+; you can select the key you prefer to
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+
+; enable a more powerful jump back function from ace jump mode
+
+(autoload
+  'ace-jump-mode-pop-mark
+  "ace-jump-mode"
+  "Ace jump back:-)"
+  t)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+
+; If you use viper mode :
+; (define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
+; If you use evil
+; (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+#+end_src
+** flycheck
+#+begin_src emacs-lisp :tangle yes
+   (add-hook 'after-init-hook #'global-flycheck-mode)
+#+end_src
+** flymake shell
+#+begin_src emacs-lisp :tangle yes
+  (require 'flymake-shell)
+  (add-hook 'sh-set-shell-hook 'flymake-shell-load)
+#+end_src
+** company mode
+*** acutex
+#+begin_src emacs-lisp :tangle yes
+(require 'company-auctex)
+(company-auctex-init)
+#+end_src
+** smart forward
+#+begin_src emacs-lisp :tangle yes
+    (require 'smart-forward)
+    (global-set-key (kbd "M-<up>") 'smart-up)
+    (global-set-key (kbd "M-<down>") 'smart-down)
+    (global-set-key (kbd "M-<left>") 'smart-backward)
+    (global-set-key (kbd "M-<right>") 'smart-forward)
+#+end_src
+
 * mode specific
 #+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -337,10 +371,34 @@
 (global-set-key (kbd "C-M-S-k") 'backward-kill-sexp ) ;C-M-K kills backward balanced expression
 ;(global-set-key [capslock] '\C) ; <----- does not work
 (global-set-key (kbd "C-@") 'mark-full-word-under-cursor ) ;C-S-2 mark full word by before and after word movement
-(global-set-key [f1] '(lambda() (interactive) (ansi-term "/bin/bash")));start shell replaced with help button
+(global-set-key [f1] '(lambda() (interactive) (ansi-term shell-file-name)));start shell replaced with help button
 (global-set-key (kbd "\C-x p") 'eval-buffer);eval buffer
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (global-set-key "\M-?" 'hippie-expand)
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+(define-key ac-complete-mode-map "\M-/" 'ac-stop)
+(define-key ac-complete-mode-map "\t" 'ac-complete)
+(define-key ac-complete-mode-map "\r" nil)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-,") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+(global-set-key [remap kill-ring-save] 'easy-kill)
+(global-set-key [remap mark-sexp] 'easy-mark)
+(global-set-key (kbd "M-@") 'easy-mark-word)
+(global-set-key (kbd "C-M-@") 'easy-mark-sexp)
+(global-set-key [remap zap-to-char] 'easy-mark-to-char)
+(global-set-key (kbd "C-c a") 'anyins-mode)
+(global-set-key (kbd "C-x r t") 'inline-string-rectangle)
+(global-set-key (kbd "C-M-<") 'mark-previous-like-this)
+(global-set-key (kbd "C-M->") 'mark-next-like-this)
+(global-set-key (kbd "C-M-m") 'mark-more-like-this) ; like the other two, but takes an argument (negative is previous)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+
+
 
 #+end_src
 
