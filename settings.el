@@ -3,7 +3,9 @@
   (require 'package)
   (add-to-list
    'package-archives
-   '("melpa" . "http://melpa.org/packages/")
+   '(("melpa" . "http://melpa.org/packages/")
+("marmalade" . "http://marmalade-repo.org/packages/")
+("gnu" . "http://elpa.gnu.org/packages/"))
    t)
   (package-initialize))
 
@@ -41,7 +43,7 @@
         '(lambda () (ac-octave-mode-setup)))
 
 (require 'cl)
-    (require 'latex-extra)
+;(require 'latex-extra)
     (add-hook 'LaTeX-mode-hook #'latex-extra-mode)
 
 (latex-preview-pane-enable)
@@ -295,3 +297,5 @@
 (global-set-key (kbd "C-M->") 'mark-next-like-this)
 (global-set-key (kbd "C-M-m") 'mark-more-like-this) ; like the other two, but takes an argument (negative is previous)
 (global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "M-h") 'ffap)
+(global-set-key (kbd "M-S-r") 'string-insert-rectangle)

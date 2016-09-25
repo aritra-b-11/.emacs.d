@@ -1,4 +1,11 @@
 ;;; begin --- init.el starts here
+;;; Commentary:
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (require 'org)
 
 ;;; Code:
@@ -25,6 +32,9 @@
  '(fci-rule-color "#452E2E")
  '(ibuffer-deletion-face (quote diredp-deletion-file-name))
  '(ibuffer-marked-face (quote diredp-flag-mark))
+ '(package-selected-packages
+   (quote
+    (vlf smart-indent-rigidly smart-forward sexy-monochrome-theme projectile-codesearch multiple-cursors mark-multiple liso-theme latex-preview-pane latex-math-preview latex-extra jedi ido-vertical-mode focus flyparens flymake-shell flylisp flycheck-perl6 el-autoyas easy-kill-extras doom-themes docbook-snippets company-shell company-math company-auctex common-lisp-snippets birds-of-paradise-plus-theme auto-yasnippet auto-dictionary auto-complete-auctex auto-auto-indent anyins ample-zen-theme ample-theme airline-themes afternoon-theme ace-jump-mode ac-octave ac-math ac-ispell ac-dabbrev ac-capf abyss-theme 2048-game)))
  '(vc-annotate-background "#3b3b3b")
  '(vc-annotate-color-map
    (quote
