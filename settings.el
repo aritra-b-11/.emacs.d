@@ -3,9 +3,9 @@
   (require 'package)
   (add-to-list
    'package-archives
-   '(("melpa" . "http://melpa.org/packages/")
-("marmalade" . "http://marmalade-repo.org/packages/")
-("gnu" . "http://elpa.gnu.org/packages/"))
+   '("melpa" . "http://melpa.org/packages/")
+;("marmalade" . "http://marmalade-repo.org/packages/")
+;("gnu" . "http://elpa.gnu.org/packages/"))
    t)
   (package-initialize))
 
@@ -299,3 +299,8 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "M-h") 'ffap)
 (global-set-key (kbd "M-S-r") 'string-insert-rectangle)
+(global-set-key (kbd "M-S-<up>") 'windmove-up)
+(global-set-key (kbd "M-S-<down>") 'windmove-down)
+(global-set-key (kbd "M-S-<left>") 'windmove-left)
+(global-set-key (kbd "M-S-<right>") 'windmove-right)
+(global-set-key (kbd "M-i") 'imenu)
