@@ -42,6 +42,10 @@
       (add-hook 'octave-mode-hook
         '(lambda () (ac-octave-mode-setup)))
 
+(require 'ac-helm) ;; Not necessary if using ELPA package
+(global-set-key (kbd "C-:") 'ac-complete-with-helm)
+(define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-helm)
+
 (require 'cl)
 ;(require 'latex-extra)
     (add-hook 'LaTeX-mode-hook #'latex-extra-mode)
@@ -132,6 +136,27 @@
 (global-set-key (kbd "M-<left>") 'smart-backward)
 (global-set-key (kbd "M-<right>") 'smart-forward)
 
+(autoload 'helm-company "helm-company") ;; Not necessary if using ELPA package
+(eval-after-load 'company
+  '(progn
+     (define-key company-mode-map (kbd "C-:") 'helm-company)
+     (define-key company-active-map (kbd "C-:") 'helm-company)))
+
+(require 'helm-descbinds)
+(helm-descbinds-mode)
+
+(require 'helm-flycheck) ;; Not necessary if using ELPA package
+(eval-after-load 'flycheck
+  '(define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
+
+(require 'helm-orgcard)
+
+(add-to-list 'load-path (expand-file-name "~/elisp"))
+(require 'hippie-exp-ext)
+
+(require 'hlinum)
+(hlinum-activate)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;           GLOBAL EMACS OPTIONS              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -174,6 +199,7 @@
 (setq standard-indent 2)
 (setq backup-directory-alist (quote ((".*" . "~/.emacs_backups/"))))
 (fset 'yes-or-no-p 'y-or-n-p)
+(put 'set-goal-column 'disabled nil)
 
 ;; appros
 
@@ -219,9 +245,9 @@
 (setq inhibit-startup-message t)
 
 ;dark theme
-;(load-theme 'afternoon t)
+(load-theme 'hipster)
 ;light theme
-(load-theme 'tsdh-light)
+;(load-theme 'tsdh-light)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                     keyboard macro                            ;;
@@ -276,6 +302,8 @@
 (global-set-key (kbd "\C-x p") 'eval-buffer);eval buffer
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (global-set-key "\M-?" 'hippie-expand)
+(global-set-key (kbd "C-?") 'hippie-expand-dabbrev-limited-chars)
+(global-set-key (kbd "M-C-?") 'hippie-expand-file-name)
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
 (define-key ac-complete-mode-map "\M-/" 'ac-stop)
