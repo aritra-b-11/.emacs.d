@@ -221,6 +221,10 @@
     (require 'hlinum)
     (hlinum-activate)
 #+end_src
+** elisp format
+#+begin_src emacs-lisp :tangle yes
+(require 'elisp-format)
+#+end_src
 * mode specific
 #+begin_src emacs-lisp :tangle yes
 
@@ -243,20 +247,11 @@
 (tool-bar-mode -1)
 ;(pdf-tools-install)
 #+end_src
-# ** octave mode
-# #+begin_src emacs-lisp :tangle yes
-
-# (autoload 'octave-mode "octave-mode" nil t)
-# (setq auto-mode-alist
-#       (cons '("\\.m$" . octave-mode) auto-mode-alist))
-# (add-hook 'octave-mode-hook
-#           (lambda ()
-#             (abbrev-mode 1)
-#             (auto-fill-mode 1)
-#             (if (eq window-system 'x)
-#                 (font-lock-mode 1))))
-# #+end_src
-# #+end_src
+** disable hl-line in eshell mode
+#+begin_src emacs-lisp :tangle yes
+(make-variable-buffer-local 'global-hl-line-mode)
+(add-hook 'eshell-mode-hook (lambda () (setq-local global-hl-line-mode nil) (setq-local hl-line-mode nil))) ;not working!
+#+end_src
 * variable specific
 ** varibales
 #+begin_src emacs-lisp :tangle yes
@@ -354,9 +349,10 @@
 * theme
 #+begin_src emacs-lisp :tangle yes
 ;dark theme
-(load-theme 'hipster)
+;(load-theme 'hipster)
 ;light theme
 ;(load-theme 'tsdh-light)
+(load-theme 'airline-wombat t)
 #+end_src
 * keyboard macro
 
@@ -416,7 +412,8 @@
 (global-set-key (kbd "C-M-S-k") 'backward-kill-sexp ) ;C-M-K kills backward balanced expression
 ;(global-set-key [capslock] '\C) ; <----- does not work
 (global-set-key (kbd "C-@") 'mark-full-word-under-cursor ) ;C-S-2 mark full word by before and after word movement
-(global-set-key [f1] '(lambda() (interactive) (ansi-term shell-file-name)));start shell replaced with help button
+;(global-set-key [f1] '(lambda() (interactive) (ansi-term shell-file-name)));start shell replaced with help button
+(global-set-key [f1] 'eshell);start eshell replaced with help button
 (global-set-key (kbd "\C-x p") 'eval-buffer);eval buffer
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (global-set-key "\M-?" 'hippie-expand)
@@ -450,7 +447,6 @@
 (global-set-key (kbd "M-S-<left>") 'windmove-left)
 (global-set-key (kbd "M-S-<right>") 'windmove-right)
 (global-set-key (kbd "M-i") 'imenu)
-
 #+end_src
 
 

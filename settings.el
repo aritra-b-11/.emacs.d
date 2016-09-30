@@ -157,6 +157,8 @@
 (require 'hlinum)
 (hlinum-activate)
 
+(require 'elisp-format)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;           GLOBAL EMACS OPTIONS              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -175,6 +177,9 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 ;(pdf-tools-install)
+
+(make-variable-buffer-local 'global-hl-line-mode)
+(add-hook 'eshell-mode-hook (lambda () (setq-local global-hl-line-mode nil) (setq-local hl-line-mode nil))) ;not working!
 
 ;; variable
 
@@ -245,9 +250,10 @@
 (setq inhibit-startup-message t)
 
 ;dark theme
-(load-theme 'hipster)
+;(load-theme 'hipster)
 ;light theme
 ;(load-theme 'tsdh-light)
+(load-theme 'airline-wombat t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                     keyboard macro                            ;;
@@ -298,7 +304,8 @@
 (global-set-key (kbd "C-M-S-k") 'backward-kill-sexp ) ;C-M-K kills backward balanced expression
 ;(global-set-key [capslock] '\C) ; <----- does not work
 (global-set-key (kbd "C-@") 'mark-full-word-under-cursor ) ;C-S-2 mark full word by before and after word movement
-(global-set-key [f1] '(lambda() (interactive) (ansi-term shell-file-name)));start shell replaced with help button
+;(global-set-key [f1] '(lambda() (interactive) (ansi-term shell-file-name)));start shell replaced with help button
+(global-set-key [f1] 'eshell);start eshell replaced with help button
 (global-set-key (kbd "\C-x p") 'eval-buffer);eval buffer
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (global-set-key "\M-?" 'hippie-expand)
