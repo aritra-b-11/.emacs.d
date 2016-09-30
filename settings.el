@@ -339,3 +339,7 @@
 (global-set-key (kbd "M-S-<left>") 'windmove-left)
 (global-set-key (kbd "M-S-<right>") 'windmove-right)
 (global-set-key (kbd "M-i") 'imenu)
+(global-set-key (kbd "M-C-z") 'replace-string)
+(global-set-key (kbd "M-C-S-z") 'replace-regexp)
+(global-set-key (kbd "C-S-z") 'count-matches)
+(global-set-key (kbd "M-Z") 'count-words)
