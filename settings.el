@@ -1,4 +1,3 @@
-
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list
@@ -159,6 +158,13 @@
 
 (require 'elisp-format)
 
+(eval-after-load "isearch"
+  '(progn
+     (require 'isearch-dabbrev)
+     (define-key isearch-mode-map (kbd "<tab>") 'isearch-dabbrev-expand)))
+
+(eval-after-load "isearch" '(require 'isearch+))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;           GLOBAL EMACS OPTIONS              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -180,6 +186,9 @@
 
 (make-variable-buffer-local 'global-hl-line-mode)
 (add-hook 'eshell-mode-hook (lambda () (setq-local global-hl-line-mode nil) (setq-local hl-line-mode nil))) ;not working!
+
+(add-hook 'tex-mode-hook
+#'(lambda () (setq ispell-parser 'tex)))
 
 ;; variable
 
@@ -339,7 +348,10 @@
 (global-set-key (kbd "M-S-<left>") 'windmove-left)
 (global-set-key (kbd "M-S-<right>") 'windmove-right)
 (global-set-key (kbd "M-i") 'imenu)
+(global-set-key (kbd "M-I") 'tab-to-tab-stop)
 (global-set-key (kbd "M-C-z") 'replace-string)
 (global-set-key (kbd "M-C-S-z") 'replace-regexp)
 (global-set-key (kbd "C-S-z") 'count-matches)
 (global-set-key (kbd "M-Z") 'count-words)
+(global-set-key [remap execute-extended-command] 'helm-M-x)
+(global-set-key [remap bookmark-jump] 'helm-bookmarks)
