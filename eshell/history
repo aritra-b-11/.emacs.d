@@ -1,0 +1,42 @@
+ls
+ls
+man man
+ls
+ls
+cd github/
+ls
+ls
+cd emacs-org-mode-for-ieee-paper-study/
+ls
+cd github/
+ls
+mkdir bookmrk-regex
+mkdir ieee-tex-mode
+cd bookmrk-regex/
+git init
+git add bookmark-regex.org
+git commit -m "init commit"
+git remote add bm-rx https://github.com/aritra-b-11/bookmark-regex.git
+git push -u bm-rx master
+cd ..
+cd ieee-tex-mode/
+git init
+git add ieee-tex-mode.org
+git commin -m "init commit"
+git commit -m "init commit"
+git remote add ieee-t-m https://github.com/aritra-b-11/ieee-tex-mode.git
+git push ieee-t-m master
+exit
+ls
+ls
+cd .emacs.d/
+ls
+git add --all elpa/
+c
+ls
+git add --all elpa/
+git status
+git commit -m "added all the elpa packages"
+git push git-init master
+ls
+ls

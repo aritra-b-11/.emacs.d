@@ -8,187 +8,9 @@
    t)
   (package-initialize))
 
-(require 'auto-complete)
-(global-auto-complete-mode t)
-(setq ac-auto-start 3)
-(setq ac-dwim t)
-(setq-default ac-sources '(ac-source-abbrev ac-source-words-in-buffer))
-
-(add-hook 'emacs-lisp-mode-hook
- (lambda ()
- (setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
-
-(require 'auto-complete-auctex)
-
-;; Completion words longer than 4 characters
-(custom-set-variables
-  '(ac-ispell-requires 4)
-  '(ac-ispell-fuzzy-limit 4))
-
-(eval-after-load "auto-complete"
-  '(progn
-      (ac-ispell-setup)))
-
-(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
-(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
-
-(require 'auto-dictionary)
-(add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
-
-(require 'ac-octave)
-    (defun ac-octave-mode-setup ()
-      (setq ac-sources '(ac-source-octave)))
-      (add-hook 'octave-mode-hook
-        '(lambda () (ac-octave-mode-setup)))
-
-(require 'ac-helm) ;; Not necessary if using ELPA package
-(global-set-key (kbd "C-:") 'ac-complete-with-helm)
-(define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-helm)
-
-(require 'cl)
-;(require 'latex-extra)
-    (add-hook 'LaTeX-mode-hook #'latex-extra-mode)
-
-(latex-preview-pane-enable)
-
-(require 'vlf-setup)
-
-(require 'multiple-cursors)
-
-(require 'easy-kill)
-
-(require 'easy-kill-extras)
-  ;; Upgrade `mark-word' and `mark-sexp' with easy-mark
-  ;; equivalents.
-
-  ;; `easy-mark-to-char' or `easy-mark-up-to-char' could be a good
-  ;; replacement for `zap-to-char'.
-
-  ;; Add the following tuples to `oeasy-kill-alist', preferrably by
-  ;; using `customize-variable'.
-  (add-to-list 'easy-kill-alist '(?^ backward-line-edge ""))
-  (add-to-list 'easy-kill-alist '(?$ forward-line-edge ""))
-  (add-to-list 'easy-kill-alist '(?b buffer ""))
-  (add-to-list 'easy-kill-alist '(?< buffer-before-point ""))
-  (add-to-list 'easy-kill-alist '(?> buffer-after-point ""))
-  (add-to-list 'easy-kill-alist '(?f string-to-char-forward ""))
-  (add-to-list 'easy-kill-alist '(?F string-up-to-char-forward ""))
-  (add-to-list 'easy-kill-alist '(?t string-to-char-backward ""))
-  (add-to-list 'easy-kill-alist '(?T string-up-to-char-backward ""))
-
-(require 'projectile-codesearch)
-
-(require 'anyins)
-
-(require 'inline-string-rectangle)
-
-(require 'mark-more-like-this)
-
-(add-hook 'sgml-mode-hook
-          (lambda ()
-            (require 'rename-sgml-tag)
-            (define-key sgml-mode-map (kbd "C-c C-r") 'rename-sgml-tag)))
-
-(require 'expand-region)
-
-(require 'el-autoyas)
-
-; ace jump mode major function
-
-(add-to-list 'load-path "~/.emacs.d/elpa/ace-jump-mode-20140616.115/")
-(autoload
-  'ace-jump-mode
-  "ace-jump-mode"
-  "Emacs quick move minor mode"
-  t)
-; you can select the key you prefer to
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-
-
-; enable a more powerful jump back function from ace jump mode
-
-(autoload
-  'ace-jump-mode-pop-mark
-  "ace-jump-mode"
-  "Ace jump back:-)"
-  t)
-(eval-after-load "ace-jump-mode"
-  '(ace-jump-mode-enable-mark-sync))
-(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
-
-; If you use viper mode :
-; (define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
-; If you use evil
-; (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
-
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
-(require 'flymake-shell)
-(add-hook 'sh-set-shell-hook 'flymake-shell-load)
-
-(require 'company-auctex)
-(company-auctex-init)
-
-(require 'smart-forward)
-(global-set-key (kbd "M-<up>") 'smart-up)
-(global-set-key (kbd "M-<down>") 'smart-down)
-(global-set-key (kbd "M-<left>") 'smart-backward)
-(global-set-key (kbd "M-<right>") 'smart-forward)
-
-(autoload 'helm-company "helm-company") ;; Not necessary if using ELPA package
-(eval-after-load 'company
-  '(progn
-     (define-key company-mode-map (kbd "C-:") 'helm-company)
-     (define-key company-active-map (kbd "C-:") 'helm-company)))
-
-(require 'helm-descbinds)
-(helm-descbinds-mode)
-
-(require 'helm-flycheck) ;; Not necessary if using ELPA package
-(eval-after-load 'flycheck
-  '(define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
-
-(require 'helm-orgcard)
-
-(add-to-list 'load-path (expand-file-name "~/elisp"))
-(require 'hippie-exp-ext)
-
-(require 'hlinum)
-(hlinum-activate)
-
-(require 'elisp-format)
-
-(eval-after-load "isearch"
-  '(progn
-     (require 'isearch-dabbrev)
-     (define-key isearch-mode-map (kbd "<tab>") 'isearch-dabbrev-expand)))
-
-(eval-after-load "isearch" '(require 'isearch+))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;           GLOBAL EMACS OPTIONS              ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; mode
-
-(winner-mode 1)
-(global-hi-lock-mode 1)
-(ido-mode 1)
-(line-number-mode 1)
-(column-number-mode 1)
-(global-linum-mode 1)
-(global-hl-line-mode 1)
-(visual-line-mode t)
-(global-visual-line-mode t)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-;(pdf-tools-install)
-
-(make-variable-buffer-local 'global-hl-line-mode)
-(add-hook 'eshell-mode-hook (lambda () (setq-local global-hl-line-mode nil) (setq-local hl-line-mode nil))) ;not working!
-
-(add-hook 'tex-mode-hook
-#'(lambda () (setq ispell-parser 'tex)))
+(defvar gc-cons-threshold-bk)
+(setq gc-cons-threshold-bk gc-cons-threshold)
+(setq gc-cons-threshold (* 100 1024 1024))
 
 ;; variable
 
@@ -258,11 +80,203 @@
 (setq inhibit-startup-echo-area-message t)
 (setq inhibit-startup-message t)
 
+(unless (package-installed-p 'use-package)
+(package-refresh-contents)
+(package-install 'use-package))
+
+(use-package auto-complete)
+(global-auto-complete-mode t)
+(setq ac-auto-start 3)
+(setq ac-dwim t)
+(setq-default ac-sources '(ac-source-abbrev ac-source-words-in-buffer))
+
+(add-hook 'emacs-lisp-mode-hook
+ (lambda ()
+ (setq ac-sources '(ac-source-words-in-buffer ac-source-symbols))))
+
+(use-package auto-complete-auctex)
+
+;; Completion words longer than 4 characters
+(custom-set-variables
+  '(ac-ispell-requires 4)
+  '(ac-ispell-fuzzy-limit 4))
+
+(eval-after-load "auto-complete"
+  '(progn
+      (ac-ispell-setup)))
+
+(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
+(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
+
+(use-package auto-dictionary)
+(add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
+
+(use-package ac-octave)
+    (defun ac-octave-mode-setup ()
+      (setq ac-sources '(ac-source-octave)))
+      (add-hook 'octave-mode-hook
+        '(lambda () (ac-octave-mode-setup)))
+
+(use-package ac-helm) ;; Not necessary if using ELPA package
+(global-set-key (kbd "C-:") 'ac-complete-with-helm)
+(define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-helm)
+
+(use-package cl)
+;(use-package latex-extra)
+    (add-hook 'LaTeX-mode-hook #'latex-extra-mode)
+
+(latex-preview-pane-enable)
+
+(use-package vlf-setup)
+
+(use-package multiple-cursors)
+
+(use-package easy-kill)
+
+(use-package easy-kill-extras)
+  ;; Upgrade `mark-word' and `mark-sexp' with easy-mark
+  ;; equivalents.
+
+  ;; `easy-mark-to-char' or `easy-mark-up-to-char' could be a good
+  ;; replacement for `zap-to-char'.
+
+  ;; Add the following tuples to `oeasy-kill-alist', preferrably by
+  ;; using `customize-variable'.
+  (add-to-list 'easy-kill-alist '(?^ backward-line-edge ""))
+  (add-to-list 'easy-kill-alist '(?$ forward-line-edge ""))
+  (add-to-list 'easy-kill-alist '(?b buffer ""))
+  (add-to-list 'easy-kill-alist '(?< buffer-before-point ""))
+  (add-to-list 'easy-kill-alist '(?> buffer-after-point ""))
+  (add-to-list 'easy-kill-alist '(?f string-to-char-forward ""))
+  (add-to-list 'easy-kill-alist '(?F string-up-to-char-forward ""))
+  (add-to-list 'easy-kill-alist '(?t string-to-char-backward ""))
+  (add-to-list 'easy-kill-alist '(?T string-up-to-char-backward ""))
+
+(use-package projectile-codesearch)
+
+(use-package anyins)
+
+(use-package inline-string-rectangle)
+
+(use-package mark-more-like-this)
+
+(add-hook 'sgml-mode-hook
+          (lambda ()
+            (use-package rename-sgml-tag)
+            (define-key sgml-mode-map (kbd "C-c C-r") 'rename-sgml-tag)))
+
+(use-package expand-region)
+
+(use-package el-autoyas)
+
+; ace jump mode major function
+
+(add-to-list 'load-path "~/.emacs.d/elpa/ace-jump-mode-20140616.115/")
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+; you can select the key you prefer to
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+
+; enable a more powerful jump back function from ace jump mode
+
+(autoload
+  'ace-jump-mode-pop-mark
+  "ace-jump-mode"
+  "Ace jump back:-)"
+  t)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+
+; If you use viper mode :
+; (define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
+; If you use evil
+; (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+(use-package flymake-shell)
+(add-hook 'sh-set-shell-hook 'flymake-shell-load)
+
+(use-package company-auctex)
+(company-auctex-init)
+
+(use-package smart-forward)
+(global-set-key (kbd "M-<up>") 'smart-up)
+(global-set-key (kbd "M-<down>") 'smart-down)
+(global-set-key (kbd "M-<left>") 'smart-backward)
+(global-set-key (kbd "M-<right>") 'smart-forward)
+
+(autoload 'helm-company "helm-company") ;; Not necessary if using ELPA package
+(eval-after-load 'company
+  '(progn
+     (define-key company-mode-map (kbd "C-:") 'helm-company)
+     (define-key company-active-map (kbd "C-:") 'helm-company)))
+
+(use-package helm-descbinds)
+(helm-descbinds-mode)
+
+(use-package helm-flycheck) ;; Not necessary if using ELPA package
+(eval-after-load 'flycheck
+  '(define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
+
+(use-package helm-orgcard)
+
+(add-to-list 'load-path (expand-file-name "~/elisp"))
+(use-package hippie-exp-ext)
+
+(use-package hlinum)
+(hlinum-activate)
+
+(use-package elisp-format)
+
+(eval-after-load "isearch"
+  '(progn
+     (use-package isearch-dabbrev)
+     (define-key isearch-mode-map (kbd "<tab>") 'isearch-dabbrev-expand)))
+
+(eval-after-load "isearch" '(use-package isearch+))
+
+(use-package helm-bind-key)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;           GLOBAL EMACS OPTIONS              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; mode
+
+(winner-mode 1)
+(global-hi-lock-mode 1)
+(ido-mode 1)
+(line-number-mode 1)
+(column-number-mode 1)
+(global-linum-mode 1)
+(global-hl-line-mode 1)
+(visual-line-mode t)
+(global-visual-line-mode t)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(auto-revert-mode 1)
+;(pdf-tools-install)
+(scroll-bar-mode -1)
+(ido-vertical-mode 1)
+
+(make-variable-buffer-local 'global-hl-line-mode)
+(add-hook 'eshell-mode-hook (lambda () (setq-local global-hl-line-mode nil) (setq-local hl-line-mode nil))) ;not working!
+
+(add-hook 'tex-mode-hook
+#'(lambda () (setq ispell-parser 'tex)))
+
 ;dark theme
 ;(load-theme 'hipster)
+(load-theme 'ubuntu t)
 ;light theme
 ;(load-theme 'tsdh-light)
-(load-theme 'airline-wombat t)
+;(load-theme 'airline-wombat t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                     keyboard macro                            ;;
@@ -353,5 +367,7 @@
 (global-set-key (kbd "M-C-S-z") 'replace-regexp)
 (global-set-key (kbd "C-S-z") 'count-matches)
 (global-set-key (kbd "M-Z") 'count-words)
-(global-set-key [remap execute-extended-command] 'helm-M-x)
+(global-set-key (kbd "M-X") 'helm-M-x)
 (global-set-key [remap bookmark-jump] 'helm-bookmarks)
+
+(emacs-init-time)

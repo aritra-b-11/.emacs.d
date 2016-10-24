@@ -1,0 +1,25 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("settings"
+ (filename . "~/.emacs.d/settings.org")
+ (front-context-string . "* Add melpa to p")
+ (rear-context-string)
+ (position . 1))
+("init-file"
+ (filename . "~/.emacs.d/init.el")
+ (front-context-string . ";;; begin --- in")
+ (rear-context-string)
+ (position . 1))
+("scaling-math"
+ (filename . "~/Desktop/LaTeX/Bulk-finFET-scaling-math-article/BulkFinFET-scaling-math.tex")
+ (front-context-string . "\\documentclass[a")
+ (rear-context-string)
+ (position . 1))
+("schedule-elisp"
+ (filename . "~/github/org-mode-for-project-management/schedule.el")
+ (front-context-string . "\n(defvar schedul")
+ (rear-context-string . "+++++++++++++++\n")
+ (position . 2239))
+)
