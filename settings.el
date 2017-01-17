@@ -1,3 +1,4 @@
+
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list
@@ -243,6 +244,9 @@
 
 (use-package helm-bind-key)
 
+(use-package iy-go-to-char)
+(add-to-list 'mc/cursor-specific-vars 'iy-go-to-char-start-pos)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;           GLOBAL EMACS OPTIONS              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -369,5 +373,26 @@
 (global-set-key (kbd "M-Z") 'count-words)
 (global-set-key (kbd "M-X") 'helm-M-x)
 (global-set-key [remap bookmark-jump] 'helm-bookmarks)
+(global-set-key (kbd "C-c f") 'iy-go-to-char)
+(global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
+(global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
+(global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
 
 (emacs-init-time)
+
+(add-hook 'emacs-startup-hook
+  (lambda ()
+;    (kill-buffer "*scratch*")
+    (ansi-term "/bin/bash")
+  ))
+
+;(add-to-list 'load-path "~/.emacs.d/elpa/org-mode/lisp")
+;(add-to-list 'load-path "~/.emacs.d/elpa/org-mode/contrib/lisp" t)
+
+(add-to-list 'load-path "~/.emacs.d/elpa/benchmark-init-20150905.238/benchmark-init.el")
+(use-package benchmark-init-loaddefs)
+(benchmark-init/activate)
+
+;(let ((benchmark-init.el "~/.emacs.d/elpa/benchmark-init-20150905.238/benchmark-init.el"))
+;  (when (file-exists-p benchmark-init.el)
+;    (load benchmark-init.el)))

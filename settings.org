@@ -345,6 +345,11 @@
 #+begin_src emacs-lisp :tangle yes
 (use-package helm-bind-key)
 #+end_src
+** iy to char
+#+begin_src emacs-lisp :tangle yes
+    (use-package iy-go-to-char)
+    (add-to-list 'mc/cursor-specific-vars 'iy-go-to-char-start-pos)
+#+end_src
 * mode specific
 #+begin_src emacs-lisp :tangle yes
 
@@ -490,8 +495,38 @@
 (global-set-key (kbd "M-Z") 'count-words)
 (global-set-key (kbd "M-X") 'helm-M-x)
 (global-set-key [remap bookmark-jump] 'helm-bookmarks)
+(global-set-key (kbd "C-c f") 'iy-go-to-char)
+(global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
+(global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
+(global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
+
 #+end_src
+
 * emacs init time
 #+begin_src emacs-lisp :tangle yes
 (emacs-init-time)
+#+end_src
+* emacs startup
+#+begin_src emacs-lisp :tangle yes
+(add-hook 'emacs-startup-hook
+  (lambda ()
+;    (kill-buffer "*scratch*")
+    (ansi-term "/bin/bash")
+  ))
+#+end_src
+* org mode
+#+begin_src emacs-lisp :tangle yes
+;(add-to-list 'load-path "~/.emacs.d/elpa/org-mode/lisp")
+;(add-to-list 'load-path "~/.emacs.d/elpa/org-mode/contrib/lisp" t)
+#+end_src
+* benchmark emacs startup
+
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'load-path "~/.emacs.d/elpa/benchmark-init-20150905.238/benchmark-init.el")
+(use-package benchmark-init-loaddefs)
+(benchmark-init/activate)
+
+;(let ((benchmark-init.el "~/.emacs.d/elpa/benchmark-init-20150905.238/benchmark-init.el"))
+;  (when (file-exists-p benchmark-init.el)
+;    (load benchmark-init.el)))
 #+end_src

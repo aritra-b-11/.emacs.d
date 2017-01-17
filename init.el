@@ -21,8 +21,6 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-map (ansi-color-make-color-map) t)
- '(ansi-color-names-vector
-   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(ansi-term-color-vector
    [unspecified "#1F1611" "#660000" "#144212" "#EFC232" "#5798AE" "#BE73FD" "#93C1BC" "#E6E1DC"] t)
  '(custom-safe-themes
@@ -40,7 +38,7 @@
      ("deleted" :foreground "#ff2c4b" :bold t))))
  '(package-selected-packages
    (quote
-    (projectile use-package ubuntu-theme eide ego idle-require discover helm-bind-key edit-at-point el-get elpa-audit ace-isearch oldlace-theme org-ac org isearch-prop isearch+ isearch-symbol-at-point isearch-dabbrev apropos-fn+var base16-theme badwolf-theme ahungry-theme whole-line-or-region highlight-defined elisp-lint elisp-format hlinum zonokai-theme wc-goal-mode manage-minor-mode makey magithub magit hipster-theme hippie-exp-ext helm-themes helm-projectile helm-perldoc helm-orgcard helm-open-github helm-package helm-flycheck helm-dictionary helm-descbinds helm-company helm-codesearch helm-c-yasnippet helm-firefox ac-helm helm-bibtexkey helm-bibtex helm vlf smart-indent-rigidly smart-forward sexy-monochrome-theme projectile-codesearch multiple-cursors mark-multiple liso-theme latex-preview-pane latex-math-preview latex-extra jedi ido-vertical-mode focus flyparens flymake-shell flylisp flycheck-perl6 el-autoyas easy-kill-extras doom-themes docbook-snippets company-shell company-math company-auctex common-lisp-snippets birds-of-paradise-plus-theme auto-yasnippet auto-dictionary auto-complete-auctex auto-auto-indent anyins ample-zen-theme ample-theme airline-themes afternoon-theme ace-jump-mode ac-octave ac-math ac-ispell ac-dabbrev ac-capf abyss-theme 2048-game)))
+    (benchmark-init iy-go-to-char ox-reveal org-tree-slide smartparens embrace expand-region projectile use-package ubuntu-theme eide ego idle-require discover helm-bind-key edit-at-point el-get elpa-audit ace-isearch oldlace-theme org-ac org isearch-prop isearch+ isearch-symbol-at-point isearch-dabbrev apropos-fn+var base16-theme badwolf-theme ahungry-theme whole-line-or-region highlight-defined elisp-lint elisp-format hlinum zonokai-theme wc-goal-mode manage-minor-mode makey magithub magit hipster-theme hippie-exp-ext helm-themes helm-projectile helm-perldoc helm-orgcard helm-open-github helm-package helm-flycheck helm-dictionary helm-descbinds helm-company helm-codesearch helm-c-yasnippet helm-firefox ac-helm helm-bibtexkey helm-bibtex helm vlf smart-indent-rigidly smart-forward sexy-monochrome-theme projectile-codesearch multiple-cursors mark-multiple liso-theme latex-preview-pane latex-math-preview latex-extra jedi ido-vertical-mode focus flyparens flymake-shell flylisp flycheck-perl6 el-autoyas easy-kill-extras doom-themes docbook-snippets company-shell company-math company-auctex common-lisp-snippets birds-of-paradise-plus-theme auto-yasnippet auto-dictionary auto-complete-auctex auto-auto-indent anyins ample-zen-theme ample-theme airline-themes afternoon-theme ace-jump-mode ac-octave ac-math ac-ispell ac-dabbrev ac-capf abyss-theme 2048-game)))
  '(vc-annotate-background "#3b3b3b")
  '(vc-annotate-color-map
    (quote
@@ -72,3 +70,4 @@
 ;;; init.el ends here
 
 
+(put 'downcase-region 'disabled nil)

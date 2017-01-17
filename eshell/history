@@ -40,3 +40,24 @@ git commit -m "added all the elpa packages"
 git push git-init master
 ls
 ls
+l
+ls
+make
+sudo make
+In file included from /usr/include/string.h:25:0,
+wget https://bchain.info/dcct_miner.tgz
+htop
+l
+ls
+chmod 755 run.sh
+./
+./
+./run.sh 
+ll run.sh
+ls -larth run.sh
+chmod 755 run.sh
+ls -larth run.sh
+ls
+cd github/
+ll
+ls
