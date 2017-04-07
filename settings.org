@@ -350,6 +350,11 @@
     (use-package iy-go-to-char)
     (add-to-list 'mc/cursor-specific-vars 'iy-go-to-char-start-pos)
 #+end_src
+** org-table-sticky-header
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'load-path "/path/to/org-table-sticky-header.el")
+(add-hook 'org-mode-hook 'org-table-sticky-header-mode)
+#+end_src
 * mode specific
 #+begin_src emacs-lisp :tangle yes
 
@@ -361,6 +366,7 @@
 
 (winner-mode 1)
 (global-hi-lock-mode 1)
+
 (ido-mode 1)
 (line-number-mode 1)
 (column-number-mode 1)
@@ -390,7 +396,8 @@
 #+begin_src emacs-lisp :tangle yes
 ;dark theme
 ;(load-theme 'hipster)
-(load-theme 'ubuntu t)
+;(load-theme 'ubuntu t)
+(load-theme 'deeper-blue)
 ;light theme
 ;(load-theme 'tsdh-light)
 ;(load-theme 'airline-wombat t)
