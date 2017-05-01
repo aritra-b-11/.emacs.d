@@ -392,16 +392,6 @@
 #'(lambda () (setq ispell-parser 'tex)))
 #+end_src
 
-* theme
-#+begin_src emacs-lisp :tangle yes
-;dark theme
-;(load-theme 'hipster)
-;(load-theme 'ubuntu t)
-(load-theme 'deeper-blue)
-;light theme
-;(load-theme 'tsdh-light)
-;(load-theme 'airline-wombat t)
-#+end_src
 * keyboard macro
 
 #+begin_src emacs-lisp :tangle yes
@@ -526,6 +516,19 @@
 ;(add-to-list 'load-path "~/.emacs.d/elpa/org-mode/lisp")
 ;(add-to-list 'load-path "~/.emacs.d/elpa/org-mode/contrib/lisp" t)
 #+end_src
+* theme
+#+begin_src emacs-lisp :tangle yes
+;dark theme
+;(load-theme 'hipster)
+;(load-theme 'ubuntu t)
+;(load-theme 'deeper-blue)
+;(load-theme 'manoj-dark)
+(load-theme 'kaolin t)
+;light theme
+;(load-theme 'tsdh-light)
+;(load-theme 'airline-wombat t)
+#+end_src
+
 * benchmark emacs startup
 
 #+begin_src emacs-lisp :tangle yes

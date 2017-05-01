@@ -1,4 +1,3 @@
-
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list
@@ -247,6 +246,9 @@
 (use-package iy-go-to-char)
 (add-to-list 'mc/cursor-specific-vars 'iy-go-to-char-start-pos)
 
+(add-to-list 'load-path "/path/to/org-table-sticky-header.el")
+(add-hook 'org-mode-hook 'org-table-sticky-header-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;           GLOBAL EMACS OPTIONS              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -255,6 +257,7 @@
 
 (winner-mode 1)
 (global-hi-lock-mode 1)
+
 (ido-mode 1)
 (line-number-mode 1)
 (column-number-mode 1)
@@ -274,13 +277,6 @@
 
 (add-hook 'tex-mode-hook
 #'(lambda () (setq ispell-parser 'tex)))
-
-;dark theme
-;(load-theme 'hipster)
-(load-theme 'ubuntu t)
-;light theme
-;(load-theme 'tsdh-light)
-;(load-theme 'airline-wombat t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                     keyboard macro                            ;;
@@ -388,6 +384,16 @@
 
 ;(add-to-list 'load-path "~/.emacs.d/elpa/org-mode/lisp")
 ;(add-to-list 'load-path "~/.emacs.d/elpa/org-mode/contrib/lisp" t)
+
+;dark theme
+;(load-theme 'hipster)
+;(load-theme 'ubuntu t)
+;(load-theme 'deeper-blue)
+;(load-theme 'manoj-dark)
+(load-theme 'kaolin t)
+;light theme
+;(load-theme 'tsdh-light)
+;(load-theme 'airline-wombat t)
 
 (add-to-list 'load-path "~/.emacs.d/elpa/benchmark-init-20150905.238/benchmark-init.el")
 (use-package benchmark-init-loaddefs)

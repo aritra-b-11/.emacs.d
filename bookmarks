@@ -18,7 +18,7 @@
  (rear-context-string)
  (position . 1))
 ("schedule-elisp"
- (filename . "~/github/org-mode-for-project-management/schedule.el")
+ (filename . "~/github/schedule-mode/schedule.el")
  (front-context-string . "\n(defvar schedul")
  (rear-context-string . "+++++++++++++++\n")
  (position . 2239))
