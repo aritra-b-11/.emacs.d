@@ -116,6 +116,11 @@
 (package-refresh-contents)
 (package-install 'use-package))
 #+end_src
+** point pos
+#+begin_src emacs-lisp :tangle yes
+  (add-to-list 'load-path "/path/to/point-pos")
+  (autoload 'point-pos-save "point-pos" nil t)
+#+end_src
 ** auto complete
 #+begin_src emacs-lisp :tangle yes
 (use-package auto-complete)
@@ -523,8 +528,9 @@
 ;(load-theme 'ubuntu t)
 ;(load-theme 'deeper-blue)
 ;(load-theme 'manoj-dark)
-(load-theme 'kaolin t)
+;(load-theme 'kaolin t)
 ;light theme
+(load-theme 'autumn-light t)
 ;(load-theme 'tsdh-light)
 ;(load-theme 'airline-wombat t)
 #+end_src

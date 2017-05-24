@@ -84,6 +84,9 @@
 (package-refresh-contents)
 (package-install 'use-package))
 
+(add-to-list 'load-path "/path/to/point-pos")
+(autoload 'point-pos-save "point-pos" nil t)
+
 (use-package auto-complete)
 (global-auto-complete-mode t)
 (setq ac-auto-start 3)
@@ -390,8 +393,9 @@
 ;(load-theme 'ubuntu t)
 ;(load-theme 'deeper-blue)
 ;(load-theme 'manoj-dark)
-(load-theme 'kaolin t)
+;(load-theme 'kaolin t)
 ;light theme
+(load-theme 'autumn-light t)
 ;(load-theme 'tsdh-light)
 ;(load-theme 'airline-wombat t)
 
