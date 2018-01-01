@@ -252,6 +252,11 @@
 (add-to-list 'load-path "/path/to/org-table-sticky-header.el")
 (add-hook 'org-mode-hook 'org-table-sticky-header-mode)
 
+;(define-key python-mode-map (kbd "C-c i") 'elpygen-implement)
+
+(package-initialize)
+(elpy-enable)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;           GLOBAL EMACS OPTIONS              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -280,6 +285,8 @@
 
 (add-hook 'tex-mode-hook
 #'(lambda () (setq ispell-parser 'tex)))
+
+(show-paren-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                     keyboard macro                            ;;

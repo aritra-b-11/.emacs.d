@@ -360,6 +360,15 @@
 (add-to-list 'load-path "/path/to/org-table-sticky-header.el")
 (add-hook 'org-mode-hook 'org-table-sticky-header-mode)
 #+end_src
+** elpygen
+#+begin_src emacs-lisp :tangle yes
+;(define-key python-mode-map (kbd "C-c i") 'elpygen-implement)
+#+end_src
+** elpy
+#+begin_src emacs-lisp :tangle yes
+(package-initialize)
+(elpy-enable)
+#+end_src
 * mode specific
 #+begin_src emacs-lisp :tangle yes
 
@@ -396,7 +405,10 @@
 (add-hook 'tex-mode-hook
 #'(lambda () (setq ispell-parser 'tex)))
 #+end_src
-
+** show paren mode
+#+begin_src emacs-lisp :tangle yes
+(show-paren-mode 1)
+#+end_src
 * keyboard macro
 
 #+begin_src emacs-lisp :tangle yes
