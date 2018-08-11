@@ -357,7 +357,7 @@
 #+end_src
 ** org-table-sticky-header
 #+begin_src emacs-lisp :tangle yes
-(add-to-list 'load-path "/path/to/org-table-sticky-header.el")
+;(add-to-list 'load-path "/path/to/org-table-sticky-header.el")
 (add-hook 'org-mode-hook 'org-table-sticky-header-mode)
 #+end_src
 ** elpygen
@@ -368,6 +368,17 @@
 #+begin_src emacs-lisp :tangle yes
 (package-initialize)
 (elpy-enable)
+(setenv "PATH" (concat (getenv "PATH") ":/home/aritra/.local/bin"))
+(setq exec-path (append exec-path '("/home/aritra/.local/bin")))
+(define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
+(define-key global-map (kbd "C-c o") 'iedit-mode)
+#+end_src
+** cycle-themes
+#+begin_src emacs-lisp :tangle yes
+    (setq cycle-themes-theme-list
+          '(doom-molokai leuven monokai solarized-dark))
+    (require 'cycle-themes)
+    (cycle-themes-mode)
 #+end_src
 * mode specific
 #+begin_src emacs-lisp :tangle yes
@@ -513,6 +524,7 @@
 (global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
 (global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
 (global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
+(global-set-key (kbd "M-C-g") 'org-plot/gnuplot)
 
 #+end_src
 
@@ -532,6 +544,15 @@
 #+begin_src emacs-lisp :tangle yes
 ;(add-to-list 'load-path "~/.emacs.d/elpa/org-mode/lisp")
 ;(add-to-list 'load-path "~/.emacs.d/elpa/org-mode/contrib/lisp" t)
+;(add-to-list 'load-path "/home/aritra/.emacs.d/github/ox-taskjuggler/ox-taskjuggler.el")
+;(add-to-list 'load-path "/home/aritra/.emacs.d/github/ox-taskjuggler/ox-taskjuggler.el")
+;(autoload 'ox-taskjuggler "ox-taskjuggler" "org taskjuggler export" t nil)
+;(define-package "ox-taskjuggler" "20171202.1713" "Export org mode projects to Taskjuggler" '((emacs "24.3") (org "9")))
+(find-file "~/.emacs.d/elpa/ox-taskjuggler-20180711.112/ox-taskjuggler.el")
+(eval-buffer)
+(kill-buffer "ox-taskjuggler.el")
+(add-to-list 'org-export-backends 'taskjuggler)
+;(use-package 'ox-taskjuggler)
 #+end_src
 * theme
 #+begin_src emacs-lisp :tangle yes

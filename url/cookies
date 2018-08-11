@@ -1,0 +1,14 @@
+;; Emacs-W3 HTTP cookies file
+;; Automatically generated file!!! DO NOT EDIT!!!
+
+(setq url-cookie-storage
+ '((".bitstamp.net"
+  [url-cookie "visid_incap_99025" "XTlkcSk9T2KWRLIe5bfm6qiv/VkAAAAAQUIPAAAAAAD2W0OTgu5R9R0zx/FvjwAZ" "Sun, 04 Nov 2018 08:37:48 GMT" "/" ".bitstamp.net" nil]))
+)
+(setq url-cookie-secure-storage
+ 'nil)
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; End:
